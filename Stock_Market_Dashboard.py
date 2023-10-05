@@ -258,7 +258,9 @@ def get_dividend_table(selected_security_code, selected_years_range):
     column_width_style = '''
         <style>
             table {
-                table-layout: fixed;
+                table-layout: fixed; /* Set the table layout to fixed */
+                width: 100%; /* Set the table width to 100% of the container */
+                overflow-x: auto; /* Enable horizontal scrolling */
             }
             th, td {
                 width: 10%;  /* You can adjust the width percentage as needed */
