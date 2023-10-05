@@ -267,7 +267,7 @@ def get_dividend_table(selected_security_code, selected_years_range):
                 white-space: nowrap;  /* Prevent text wrapping */
                 overflow: hidden;  /* Hide overflowing content */
                 text-overflow: ellipsis;  /* Display ellipsis for long text */
-                min-width: 500px; /* Set a minimum width for the columns */
+                min-width: 250px; /* Set a minimum width for the columns */
             }
         </style>
     '''
