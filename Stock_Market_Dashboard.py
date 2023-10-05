@@ -257,10 +257,6 @@ def get_dividend_table(selected_security_code, selected_years_range):
     # Define CSS style to set equal column widths
     column_width_style = '''
         <style>
-            table {
-                table-layout: fixed;
-                width: 100%;
-            }
             th, td {
                 width: 10%;  /* You can adjust the width percentage as needed */
                 text-align: center;  /* Center-align content */
