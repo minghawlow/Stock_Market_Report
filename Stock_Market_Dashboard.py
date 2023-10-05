@@ -238,8 +238,8 @@ def get_dividend_table(selected_security_code, selected_years_range):
     pivot_table.columns = new_columns
 
     # Calculate the total dividends for each year
-    pivot_table = pivot_table.map(lambda x: '' if x == 0.00 else "{:.4f}".format(x))
-    pivot_table['Total'] = pivot_table.sum(axis=1)
+    pivot_table['Total'] = pivot_table.apply(lambda row: row.dropna().sum(), axis=1)
+    pivot_table = pivot_table.map(lambda x: '' if x == 0.00 else "{:.4f}".format(x))    
     
     # Create a styler object
     styler = pivot_table.style
