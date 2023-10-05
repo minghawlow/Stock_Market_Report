@@ -168,7 +168,7 @@ def generate_stock_chart(data):
 
 # Plot the stock chart
 stock_chart = generate_stock_chart(data)
-st.altair_chart(stock_chart)
+st.altair_chart(stock_chart, use_container_width=True)
 
 # Display the year range subtitle
 subheader_text = f"Year Range: {selected_years_range[0]} - {selected_years_range[1]}"
@@ -199,7 +199,18 @@ def display_styled_table(data):
         # Display the styled table
         st.table(styled_table)
 
+        # Add a download button for CSV
+        csv_data = download_styled_table_as_csv(pivot_table)
+        st.download_button("Download as CSV", csv_data, file_name=f"{selected_company}.csv", key="csv-download")
+
+def download_styled_table_as_csv(pivot_table):
+    # Convert the pivot table to CSV format
+    csv_data = pivot_table.to_csv(index=True, encoding='utf-8')
+
+    return csv_data
+
 display_styled_table(data)
+
 
 def get_dividend_table(selected_security_code, selected_years_range):
     # Create a Ticker object
@@ -227,10 +238,54 @@ def get_dividend_table(selected_security_code, selected_years_range):
     pivot_table.columns = new_columns
 
     # Calculate the total dividends for each year
+    pivot_table = pivot_table.map(lambda x: '' if x == 0.00 else "{:.4f}".format(x))
     pivot_table['Total'] = pivot_table.sum(axis=1)
-    pivot_table = pivot_table.applymap("{:.2f}".format)
+    
+    # Create a styler object
+    styler = pivot_table.style
 
-    return pivot_table
+    # Define a function for conditional formatting
+    def highlight_non_zero(val):
+        if val != '':
+            return f'background-color: #BFEFFF'
+        return ''
+
+    # Apply the conditional formatting to the entire DataFrame
+    styled_table = styler.map(highlight_non_zero)
+
+
+    # Define CSS style to set equal column widths
+    column_width_style = '''
+        <style>
+            table {
+                table-layout: fixed;
+                width: 100%;
+            }
+            th, td {
+                width: 10%;  /* You can adjust the width percentage as needed */
+                text-align: center;  /* Center-align content */
+                white-space: nowrap;  /* Prevent text wrapping */
+                overflow: hidden;  /* Hide overflowing content */
+                text-overflow: ellipsis;  /* Display ellipsis for long text */
+            }
+        </style>
+    '''
+
+    # Apply the column width style using st.markdown
+    st.markdown(column_width_style, unsafe_allow_html=True)
+
+    # Display the styled table
+    st.table(styled_table)
+
+    # Add a download button for CSV
+    csv_data = download_styled_table_as_csv(pivot_table)
+    st.download_button("Download as CSV", csv_data, file_name=f"{selected_company}_dividend_table.csv", key="download_dividend_csv")
+
+def download_styled_table_as_csv(pivot_table):
+    # Convert the pivot table to CSV format
+    csv_data = pivot_table.to_csv(index=True, encoding='utf-8')
+
+    return csv_data
 
 # Streamlit app
 st.subheader('Dividend Table')
@@ -248,8 +303,6 @@ header_style = '''
 
 # Apply the style using st.markdown
 st.markdown(header_style, unsafe_allow_html=True)
-
  # Apply the styling to the DataFrame
-st.table(dividend_table)
 
 
