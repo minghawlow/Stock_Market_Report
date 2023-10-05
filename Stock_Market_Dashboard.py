@@ -261,13 +261,7 @@ def get_dividend_table(selected_security_code, selected_years_range):
                 width: 100%; /* Set the table width to 100% of the container */
             }
             th, td {
-                width: 10%;  /* You can adjust the width percentage as needed */
-                text-align: center;  /* Center-align content */
-                white-space: nowrap;  /* Prevent text wrapping */
-                overflow: hidden;  /* Hide overflowing content */
-                text-overflow: ellipsis;  /* Display ellipsis for long text */
                 min-width: 100px; /* Set a minimum width for the columns */
-
             }
         </style>
     '''
