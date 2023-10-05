@@ -4,7 +4,7 @@ import pandas as pd
 import altair as alt
 
 # Set the page width to the maximum available width
-st.set_page_config(layout="wide")
+st.set_page_config(page_title='Stock Market Report',page_icon=':chart_with_upwards_trend:', layout="wide")
 
 # Add a title to your Streamlit app
 st.title('Stock Market Report')
