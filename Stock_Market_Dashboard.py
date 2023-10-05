@@ -259,7 +259,6 @@ def get_dividend_table(selected_security_code, selected_years_range):
         <style>
             table {
                 table-layout: fixed; /* Set the table layout to fixed */
-                width: 100%; /* Set the table width to 100% of the container */
                 overflow-x: auto; /* Enable horizontal scrolling */
             }
             th, td {
