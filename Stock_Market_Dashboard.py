@@ -64,7 +64,7 @@ else:
 
 # Create a function to get historical stock data based on user selections
 def get_historical_stock_data(stock_symbol, period='1mo'):
-    data = yf.download(stock_symbol, period='max', interval=period)
+    data = yf.download(stock_symbol, period='max', interval=period,auto_adjust=False)
     data['Average'] = (data['High'] + data['Low']) / 2
     data['Year'] = data.index.year
     data['Month'] = data.index.month
