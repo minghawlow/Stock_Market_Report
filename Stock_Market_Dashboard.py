@@ -170,7 +170,7 @@ def generate_stock_chart(data):
 stock_chart = generate_stock_chart(data)
 st.altair_chart(stock_chart, use_container_width=True)
 
-st.markdown("The value of the chart is based on monthly close price.")
+st.caption("The value of the chart is based on monthly close price.")
 
 # Display the year range subtitle
 subheader_text = f"Year Range: {selected_years_range[0]} - {selected_years_range[1]}"
