@@ -130,7 +130,7 @@ def generate_stock_chart(data):
         filtered_data = data
 
         # Calculate overall price change
-        price_change = filtered_data['Close'].iloc[-1] - filtered_data['Close'].iloc[0]
+        price_change = filtered_data['Close'].iloc[-1].values[0] - filtered_data['Close'].iloc[0].values[0]
 
         # Determine line color based on overall price change
         line_color = 'green' if price_change >= 0 else 'red'
